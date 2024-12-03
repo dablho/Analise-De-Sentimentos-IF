@@ -15,6 +15,15 @@ from nltk.tokenize import word_tokenize
 nltk.download('stopwords')
 nltk.download('punkt')
 
+# Definir o diretório para armazenar os dados do NLTK
+nltk_data_dir = os.path.join(os.getcwd(), 'nltk_data')
+if not os.path.exists(nltk_data_dir):
+    os.makedirs(nltk_data_dir)
+
+# Adicionar o diretório ao caminho de dados do NLTK
+nltk.data.path.append(nltk_data_dir)
+nltk.download('all', download_dir=nltk_data_dir)
+
 # Configuração da página
 st.set_page_config(page_title="Análise de Sentimentos", layout="centered")
 
