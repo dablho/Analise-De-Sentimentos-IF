@@ -37,10 +37,10 @@ st.set_page_config(page_title="Análise de Sentimentos", layout="centered")
 def get_data_from_db():
     try:
         conn = psycopg2.connect(
-             host=os.getenv("host"),
-             database=os.getenv("database"),
-             user=os.getenv("user"),
-             password=os.getenv("password")
+            host="dataiesb.iesbtech.com.br",
+            database="2312120030_William",
+            user="2312120030_William",
+            password="2312120030_William"
         )
         query = "SELECT * FROM prova.tabela_tcc"
         df = pd.read_sql(query, conn)
@@ -574,6 +574,7 @@ def main():
     st.write("")
     # Primeiro gráfico - Distribuição de Sentimentos
     st.image("imagens/Sentimentos.jpg", width=800)
+    #st.image("Sentimentos.jpg", width=800)
 
 
     # Espaço entre os gráficos
@@ -581,6 +582,53 @@ def main():
 
     # Segundo gráfico - Distribuição de Scores
     st.image("imagens/Sentimentos_Percentual.jpg", width=800)
+    #st.image("Sentimentos_Percentual.jpg", width=800)
+
+
+    ## tabela sentimentos
+
+    st.subheader("Comentários e Seus Sentimentos")
+    
+    df2 = pd.read_csv('resultados_sentimentos2.csv')
+    st.dataframe(df2)
+
+
+
+
+        # Adiciona uma seção de exemplos de comentários
+    st.write("")  # Adiciona um espaço
+    st.subheader("Exemplos de Comentários por Sentimento")
+
+    # Cria três colunas para organizar os exemplos
+    col1, col2, col3 = st.columns(3)
+
+    # Exemplos de comentários positivos
+    with col1:
+        st.write("### 🟢 Comentários Positivos")
+        positivos = df2[df2['sentimento'] == 'Positivo'].nlargest(3, 'score')
+        for _, row in positivos.iterrows():
+            st.write(f"**Score: {row['score']:.2f}**")
+            st.write(f"_{row['texto_original']}_")
+            st.write("---")
+
+    # Exemplos de comentários neutros
+    with col2:
+        st.write("### ⚪ Comentários Neutros")
+        neutros = df2[df2['sentimento'] == 'Neutro'].nlargest(3, 'score')
+        for _, row in neutros.iterrows():
+            st.write(f"**Score: {row['score']:.2f}**")
+            st.write(f"_{row['texto_original']}_")
+            st.write("---")
+
+    # Exemplos de comentários negativos
+    with col3:
+        st.write("### 🔴 Comentários Negativos")
+        negativos = df2[df2['sentimento'] == 'Negativo'].nlargest(3, 'score')
+        for _, row in negativos.iterrows():
+            st.write(f"**Score: {row['score']:.2f}**")
+            st.write(f"_{row['texto_original']}_")
+            st.write("---")
+
 
     # Espaço entre os gráficos
     st.write("")
