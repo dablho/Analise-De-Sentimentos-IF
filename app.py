@@ -37,10 +37,10 @@ st.set_page_config(page_title="Análise de Sentimentos", layout="centered")
 def get_data_from_db():
     try:
         conn = psycopg2.connect(
-            host="dataiesb.iesbtech.com.br",
-            database="2312120030_William",
-            user="2312120030_William",
-            password="2312120030_William"
+             host=os.getenv("host"),
+             database=os.getenv("database"),
+             user=os.getenv("user"),
+             password=os.getenv("password")
         )
         query = "SELECT * FROM prova.tabela_tcc"
         df = pd.read_sql(query, conn)
