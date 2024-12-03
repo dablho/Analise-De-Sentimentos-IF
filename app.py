@@ -24,6 +24,11 @@ if not os.path.exists(nltk_data_dir):
 nltk.data.path.append(nltk_data_dir)
 nltk.download('all', download_dir=nltk_data_dir)
 
+# image1 = "imagens/Sentimentos.jpg"
+# image2 = "imagens/Sentimentos_Percentual.jpg"
+# st.image(image1, width=300)
+# st.image(image2, width=300)
+
 # Configuração da página
 st.set_page_config(page_title="Análise de Sentimentos", layout="centered")
 
@@ -568,15 +573,14 @@ def main():
 
     st.write("")
     # Primeiro gráfico - Distribuição de Sentimentos
-
-
+    st.image("imagens/Sentimentos.jpg", width=300)
 
 
     # Espaço entre os gráficos
     st.write("")
 
     # Segundo gráfico - Distribuição de Scores
-
+    st.image("imagens/Sentimentos_Percentual.jpg", width=300)
 
     # Espaço entre os gráficos
     st.write("")
