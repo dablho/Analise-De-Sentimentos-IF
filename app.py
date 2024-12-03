@@ -525,7 +525,7 @@ def main():
 
 
     st.write("")
-    st.subheader("Análise Detalhada dos Comentários")
+    st.subheader("Análise de Sentimentos dos Comentários")
 
 
 
