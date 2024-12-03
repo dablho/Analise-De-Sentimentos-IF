@@ -574,6 +574,7 @@ def main():
     st.write("")
     # Primeiro gráfico - Distribuição de Sentimentos
     st.image("imagens/Sentimentos.jpg", width=300)
+    st.image("Sentimentos.jpg", width=300)
 
 
     # Espaço entre os gráficos
