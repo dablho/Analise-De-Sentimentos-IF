@@ -573,15 +573,14 @@ def main():
 
     st.write("")
     # Primeiro gráfico - Distribuição de Sentimentos
-    st.image("imagens/Sentimentos.jpg", width=300)
-    st.image("Sentimentos.jpg", width=300)
+    st.image("imagens/Sentimentos.jpg", width=800)
 
 
     # Espaço entre os gráficos
     st.write("")
 
     # Segundo gráfico - Distribuição de Scores
-    st.image("imagens/Sentimentos_Percentual.jpg", width=300)
+    st.image("imagens/Sentimentos_Percentual.jpg", width=800)
 
     # Espaço entre os gráficos
     st.write("")
