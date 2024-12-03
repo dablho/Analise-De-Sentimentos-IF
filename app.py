@@ -3,60 +3,16 @@ import pandas as pd
 import psycopg2
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-import nltk
-from nltk.sentiment import SentimentIntensityAnalyzer
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
 import string
 import unicodedata
 from collections import Counter, defaultdict
 import os
 import networkx as nx
-from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
-import torch
-
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('vader_lexicon')
-
-# Definir o diretório para armazenar os dados do NLTK
-nltk_data_dir = os.path.join(os.getcwd(), 'nltk_data')
-if not os.path.exists(nltk_data_dir):
-    os.makedirs(nltk_data_dir)
-
-# Adicionar o diretório ao caminho de dados do NLTK
-nltk.data.path.append(nltk_data_dir)
-nltk.download('all', download_dir=nltk_data_dir)
 
 # Configuração da página
 st.set_page_config(page_title="Análise de Sentimentos", layout="centered")
 
-
-# Download dos recursos necessários do NLTK
 @st.cache_resource
-def setup_sentiment_model():
-    # Usando BERTimbau ou outro modelo pré-treinado para português
-    tokenizer = AutoTokenizer.from_pretrained("neuralmind/bert-base-portuguese-cased")
-    model = AutoModelForSequenceClassification.from_pretrained(
-        "neuralmind/bert-base-portuguese-cased", num_labels=3
-    )
-
-    # Cria o pipeline de classificação
-    classifier = pipeline(
-        "sentiment-analysis", model=model, tokenizer=tokenizer, return_all_scores=True
-    )
-
-    return classifier
-
-
-def setup_nltk():
-    nltk.download("vader_lexicon")
-    nltk.download("punkt")
-    nltk.download("stopwords")
-    return SentimentIntensityAnalyzer()
-
-
 # Conexão com o banco de dados
 def get_data_from_db():
     try:
@@ -283,31 +239,6 @@ def get_custom_word_frequency(texts, top_n=10):
     )
 
     return top_words
-
-
-# Análise de sentimento
-def analyze_sentiment(text, sia):
-    # Pré-processa o texto
-    processed_text = preprocess_text(text)
-
-    # Calcula os scores de sentimento
-    scores = sia.polarity_scores(processed_text)
-
-    # Determina o sentimento baseado no compound score
-    if scores["compound"] >= 0.05:
-        sentiment = "Positivo"
-    elif scores["compound"] <= -0.05:
-        sentiment = "Negativo"
-    else:
-        sentiment = "Neutro"
-
-    return {
-        "sentiment": sentiment,
-        "compound": scores["compound"],
-        "pos": scores["pos"],
-        "neg": scores["neg"],
-        "neu": scores["neu"],
-    }
 
 
 # Análise de aspectos
@@ -668,7 +599,7 @@ def main():
 
 
     # Exemplos de comentários
-    
+
 
 
 if __name__ == "__main__":
