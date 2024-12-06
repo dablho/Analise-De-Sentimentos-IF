@@ -344,7 +344,7 @@ def main():
 
     # Nuvem de Palavras com Pré-processamento
     st.write("")
-    st.subheader("Nuvem de Palavras dos Comentários (Com Pré-processamento)")
+    st.subheader("Nuvem de Palavras dos Comentários (Com remoção de Stop Words)")
 
     # Gera a nuvem de palavras processada
     wordcloud_processed = generate_processed_wordcloud(data["comentario"])
@@ -358,7 +358,7 @@ def main():
 
     # Gráfico de Frequência de Palavras Processadas
     st.write("")
-    st.subheader("Top 10 Palavras Mais Frequentes (Com Pré-processamento)")
+    st.subheader("Top 10 Palavras Mais Frequentes (Com remoção de Stop Words)")
 
     # Obtém as palavras mais frequentes processadas
     top_words_processed = get_processed_word_frequency(data["comentario"])
@@ -368,7 +368,7 @@ def main():
     plt.bar(
         top_words_processed.keys(), top_words_processed.values(), color="lightgreen"
     )
-    plt.title("Frequência das Palavras Mais Comuns (Com Pré-processamento)")
+    plt.title("Frequência das Palavras Mais Comuns (Com remoção de Stop Words)")
     plt.xlabel("Palavras")
     plt.ylabel("Frequência")
     plt.xticks(rotation=45, ha="right")
